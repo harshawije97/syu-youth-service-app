@@ -1,19 +1,11 @@
-import { useEffect, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "./assets/vite.svg";
 import heroImg from "./assets/hero.png";
 import "./App.css";
+import React from "react";
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [status, setStatus] = useState("");
-
-  useEffect(() => {
-    fetch("/api/health")
-      .then((res) => res.json())
-      .then((data) => setStatus(data.status))
-      .catch(() => setStatus("error"));
-  }, []);
+  const [count, setCount] = React.useState<number>(0);
 
   return (
     <>
