@@ -1,0 +1,5 @@
+### List users
+GET http://localhost:3000/users HTTP/1.1
+
+### Register users
+POST http://localhost:3000/register HTTP/1.1
