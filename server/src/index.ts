@@ -5,12 +5,13 @@ import {
   getAllFormResponses,
   getFormResponses,
 } from "./services/form-response-service.js";
-import path from "path";
+import cors from "cors";
 
 dotenv.config();
 const sheetId = process.env.GOOGLE_SHEET_ID;
 
 const app = express();
+app.use(cors());
 app.set("view engine", "ejs");
 
 // Public routes
