@@ -18,6 +18,12 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 60,
     paddingHorizontal: 20,
   },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 24,
+  },
   title: {
     fontSize: 28,
     fontWeight: "bold",
@@ -82,6 +88,34 @@ export const globalStyles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     gap: 12,
+  },
+  overlay: {
+    position: "absolute",
+    bottom: 40,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+  },
+  button: {
+    backgroundColor: colors.primary,
+    paddingHorizontal: 20,
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: "#fff",
+    fontWeight: "600",
+  },
+  content: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  subtitle: {
+    marginTop: 12,
+    fontSize: 14,
+    color: colors.textSecondary,
+    opacity: 0.7,
   },
   name: {
     fontSize: 16,

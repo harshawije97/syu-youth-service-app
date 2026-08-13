@@ -2,7 +2,6 @@
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { Card, CardHeader, CardTitle } from "./ui/card";
 import DataCard, { MessageCardProps } from "./data-card";
 import { dataItems } from "@/app/data";
 
