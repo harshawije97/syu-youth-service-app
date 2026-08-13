@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Forms Response API</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        max-width: 900px;
+        width: 100%;
+        padding: 40px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        color: #333;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #666;
+        font-size: 1.1em;
+      }
+
+      .info-section {
+        margin-bottom: 40px;
+      }
+
+      .info-section h2 {
+        color: #667eea;
+        font-size: 1.5em;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #667eea;
+        padding-bottom: 10px;
+      }
+
+      .info-section p {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 10px;
+      }
+
+      .endpoint {
+        background: #f8f9fa;
+        border-left: 4px solid #667eea;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+        font-family: "Courier New", monospace;
+      }
+
+      .endpoint-method {
+        color: #667eea;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .endpoint-path {
+        color: #333;
+        font-size: 0.95em;
+        margin-bottom: 8px;
+        word-break: break-all;
+      }
+
+      .endpoint-description {
+        color: #666;
+        font-size: 0.9em;
+        font-family: Arial, sans-serif;
+        margin-bottom: 5px;
+      }
+
+      .endpoint-params {
+        color: #764ba2;
+        font-size: 0.85em;
+        margin-top: 5px;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+      }
+
+      .feature-card {
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        border-top: 4px solid #667eea;
+      }
+
+      .feature-card h3 {
+        color: #333;
+        margin-bottom: 10px;
+      }
+
+      .feature-card p {
+        color: #666;
+        font-size: 0.9em;
+        line-height: 1.6;
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 40px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+        color: #999;
+        font-size: 0.9em;
+      }
+
+      .status {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        background: #10b981;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+
+      .status-text {
+        color: #10b981;
+        font-weight: 500;
+      }
+
+      code {
+        background: #f0f0f0;
+        padding: 2px 6px;
+        border-radius: 3px;
+        font-family: "Courier New", monospace;
+        color: #d63384;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>📋 Google Forms Response API</h1>
+        <p>Fetch and manage your Google Form responses</p>
+        <p style="margin-top: 10px">
+          <span class="status"></span>
+          <span class="status-text">API is Running</span>
+        </p>
+      </div>
+
+      <div class="info-section">
+        <h2>📌 Overview</h2>
+        <p>
+          This API allows you to retrieve responses from your Google Forms
+          directly into your application. Built with Express.js and TypeScript.
+        </p>
+        <p>
+          All responses are automatically formatted with cleaned headers and
+          support pagination for efficient data handling.
+        </p>
+      </div>
+
+      <div class="info-section">
+        <h2>🔌 Available Endpoints</h2>
+
+        <div class="endpoint">
+          <div class="endpoint-method">GET</div>
+          <div class="endpoint-path">/api/forms/responses</div>
+          <div class="endpoint-description">Get paginated form responses</div>
+          <div class="endpoint-params">
+            Query params: <code>take</code> (default: 10),
+            <code>skip</code> (default: 0), <code>sheet</code> (default:
+            SYU_Responses)
+          </div>
+        </div>
+
+        <div class="endpoint">
+          <div class="endpoint-method">GET</div>
+          <div class="endpoint-path">/api/forms/responses/all</div>
+          <div class="endpoint-description">
+            Get all form responses without pagination
+          </div>
+          <div class="endpoint-params">
+            Query params: <code>sheet</code> (default: SYU_Responses)
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h2>📚 Usage Examples</h2>
+
+        <div class="endpoint">
+          <div class="endpoint-method">Example 1</div>
+          <div class="endpoint-path">
+            GET /api/forms/responses?take=15&skip=0
+          </div>
+          <div class="endpoint-description">Get first 15 responses</div>
+        </div>
+
+        <div class="endpoint">
+          <div class="endpoint-method">Example 2</div>
+          <div class="endpoint-path">
+            GET /api/forms/responses?take=10&skip=20
+          </div>
+          <div class="endpoint-description">
+            Get responses 21-30 (pagination)
+          </div>
+        </div>
+
+        <div class="endpoint">
+          <div class="endpoint-method">Example 3</div>
+          <div class="endpoint-path">GET /api/forms/responses/all</div>
+          <div class="endpoint-description">Get all responses at once</div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h2>✨ Features</h2>
+        <div class="features">
+          <div class="feature-card">
+            <h3>✅ Clean Headers</h3>
+            <p>
+              Automatically removes translations and extra text from form field
+              names
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3>📄 Pagination Support</h3>
+            <p>
+              Built-in pagination with <code>take</code> and
+              <code>skip</code> parameters
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3>🔐 Secure</h3>
+            <p>
+              Uses Google Service Account for secure server-to-server
+              authentication
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3>⚡ Fast</h3>
+            <p>
+              TypeScript with functional programming for optimal performance
+            </p>
+          </div>
+          <div class="feature-card">
+            <h3>🛡️ Validated</h3>
+            <p>Input validation for query parameters and error handling</p>
+          </div>
+          <div class="feature-card">
+            <h3>📊 Flexible</h3>
+            <p>Support for multiple sheet names and custom configurations</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-section">
+        <h2>📋 Response Format</h2>
+        <div class="endpoint">
+          <div class="endpoint-method">JSON Response</div>
+          <div
+            style="
+              margin-top: 10px;
+              color: #333;
+              font-family: &quot;Courier New&quot;, monospace;
+              font-size: 0.9em;
+              line-height: 1.6;
+            "
+          >
+            {<br />
+            &nbsp;&nbsp;"success": true,<br />
+            &nbsp;&nbsp;"data": [ /* array of form responses */ ],<br />
+            &nbsp;&nbsp;"count": 15,<br />
+            &nbsp;&nbsp;"skip": 0,<br />
+            &nbsp;&nbsp;"take": 15,<br />
+            &nbsp;&nbsp;"total": 127<br />
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>
+          🚀 Built with Express.js & TypeScript | Google Forms Response API v1.0
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

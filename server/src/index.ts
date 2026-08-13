@@ -5,15 +5,17 @@ import {
   getAllFormResponses,
   getFormResponses,
 } from "./services/form-response-service.js";
+import path from "path";
 
 dotenv.config();
 const sheetId = process.env.GOOGLE_SHEET_ID;
 
 const app = express();
+app.set("view engine", "ejs");
 
 // Public routes
-app.get("/", (req, res) => {
-  res.send("Hello from the server!");
+app.get("/", (_req, res) => {
+  res.render("index");
 });
 
 app.get("/not-found", (_req, res) => {
