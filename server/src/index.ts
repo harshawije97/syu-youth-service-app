@@ -27,6 +27,7 @@ app.post("/register", async (_req, res) => {
   res.send("Register");
 });
 
+// Google sheet responses - limit
 app.get("/responses", async (req: Request, res: Response) => {
   try {
     if (!sheetId) {
@@ -55,6 +56,7 @@ app.get("/responses", async (req: Request, res: Response) => {
   }
 });
 
+// Google sheet responses - all
 app.get("/responses/all", async (req: Request, res: Response) => {
   try {
     if (!sheetId) {
