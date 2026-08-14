@@ -6,8 +6,8 @@ import React from "react";
 import { Button } from "./ui/button";
 
 export const navLinks = [
-  { label: "Pre-registrations", href: "/pre-registrations" },
-  { label: "Registration", href: "/registration" },
+  { label: "Pre-registrations", href: "/pre-registration" },
+  { label: "Registration", href: "/registration", isBlank: true },
   { label: "Reports", href: "/reports" },
 ];
 
@@ -24,7 +24,9 @@ function Navbar() {
             variant={pathname === link.href ? "default" : "ghost"}
             size="sm"
           >
-            <Link href={link.href}>{link.label}</Link>
+            <Link href={link.href} target={link.isBlank ? "_blank" : "_self"}>
+              {link.label}
+            </Link>
           </Button>
         ))}
       </nav>
