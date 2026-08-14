@@ -24,9 +24,8 @@ export default function ScanScreen() {
     ({ data, type }: { data: string; type: string }) => {
       if (lockRef.current) return;
       lockRef.current = true;
-      setScanned(data);
 
-      // console.log("Scanned:", type, data);
+      setScanned(data);
       router.push("/scan-success");
     },
     [setScanned],

@@ -39,18 +39,20 @@ export default function RecordsScreen() {
   };
 
   return (
-    <View style={globalStyles.container}>
-      <Pressable
-        onPress={setHandleAsync}
-        style={globalStyles.button}
-        disabled={loading}
-      >
-        {loading ? (
-          <ActivityIndicator color="#fff" />
-        ) : (
-          <Text style={globalStyles.buttonText}>Sync pre-registrations</Text>
-        )}
-      </Pressable>
+    <View style={globalStyles.containerFluid}>
+      <View style={{ paddingHorizontal: 16 }}>
+        <Pressable
+          onPress={setHandleAsync}
+          style={globalStyles.button}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={globalStyles.buttonText}>Sync pre-registrations</Text>
+          )}
+        </Pressable>
+      </View>
 
       <ScrollView contentContainerStyle={{ padding: 16, gap: 12 }}>
         {clients.length === 0 ? (

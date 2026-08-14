@@ -18,6 +18,12 @@ export const globalStyles = StyleSheet.create({
     paddingTop: 60,
     paddingHorizontal: 20,
   },
+  containerFluid: {
+    flex: 1,
+    backgroundColor: colors.background,
+    paddingTop: 60,
+    paddingHorizontal: 0,
+  },
   center: {
     flex: 1,
     justifyContent: "center",
@@ -72,6 +78,40 @@ export const globalStyles = StyleSheet.create({
   label: {
     fontSize: 14,
     color: "#052f4a",
+  },
+  iconCircle: {
+    width: 110,
+    height: 110,
+    borderRadius: 55,
+    backgroundColor: colors.primary,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 28,
+  },
+  divider: {
+    width: "100%",
+    height: 1,
+    backgroundColor: "#dcdfe3",
+    marginBottom: 20,
+  },
+  detailsBlock: {
+    width: "100%",
+    gap: 14,
+    marginBottom: 24,
+  },
+  detailRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  detailLabel: {
+    fontSize: 14,
+    color: colors.textSecondary,
+  },
+  detailValue: {
+    fontSize: 14,
+    fontWeight: "600",
+    color: colors.text,
   },
   value: {
     fontSize: 28,

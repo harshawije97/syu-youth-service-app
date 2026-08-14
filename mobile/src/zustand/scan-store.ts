@@ -1,11 +1,5 @@
+import { ScanState } from "@/lib/types";
 import { create } from "zustand";
-
-type ScanState = {
-  scanned: boolean;
-  scannedData: string | null;
-  setScanned: (data: string) => void;
-  resetScanned: () => void;
-};
 
 export const useScanStore = create<ScanState>((set) => ({
   scanned: false,
