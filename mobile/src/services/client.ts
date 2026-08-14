@@ -1,5 +1,9 @@
 import { getAllData } from "@/lib/api";
-import { Client, CLIENT_KEY } from "@/storage/async-storage";
+import {
+  Client,
+  CLIENT_KEY,
+  seedClientsToStorage,
+} from "@/storage/async-storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Check is storage empty
@@ -34,6 +38,6 @@ export const clientSyncService = async (): Promise<void> => {
   }
 
   const clients = await fetchAllClients();
-  //   await AsyncStorage.setItem(CLIENT_KEY, JSON.stringify(clients));
-  console.log(clients);
+  const response = await seedClientsToStorage(clients);
+  await AsyncStorage.setItem(CLIENT_KEY, JSON.stringify(response));
 };

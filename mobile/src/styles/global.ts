@@ -65,8 +65,8 @@ export const globalStyles = StyleSheet.create({
   card: {
     backgroundColor: "#f8fafc",
     borderRadius: 12,
-    padding: 16,
-    width: "47%",
+    padding: 12,
+    width: "100%",
     borderLeftWidth: 4,
   },
   label: {
@@ -117,14 +117,54 @@ export const globalStyles = StyleSheet.create({
     color: colors.textSecondary,
     opacity: 0.7,
   },
-  name: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#000000",
-  },
   macros: {
     fontSize: 13,
     color: "#6b6375",
     marginTop: 4,
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 4,
+  },
+  name: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: colors.text,
+    flexShrink: 1,
+    marginRight: 8,
+  },
+  badge: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 999,
+  },
+  badgeText: {
+    fontSize: 11,
+    fontWeight: "600",
+  },
+  row: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+  rowText: {
+    fontSize: 13,
+    color: colors.textSecondary,
+  },
+  footerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+    marginTop: 4,
+  },
+  timestamp: {
+    fontSize: 11,
+    color: colors.textSecondary,
+    opacity: 0.7,
   },
 });
