@@ -9,26 +9,34 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "./ui/empty";
-import { FolderX } from "lucide-react";
+import { QrCodeIcon } from "lucide-react";
 import { Button } from "./ui/button";
 
 export function EmptyState() {
+  const onClickQR = () => {
+    alert("Create QR Code");
+  };
+  const onClickImport = () => {
+    alert("Import QR Code");
+  };
+
   return (
     <>
       <Empty>
         <EmptyHeader>
           <EmptyMedia variant="icon">
-            <FolderX />
+            <QrCodeIcon />
           </EmptyMedia>
-          <EmptyTitle>No Projects Yet</EmptyTitle>
+          <EmptyTitle>No QR Codes Yet</EmptyTitle>
           <EmptyDescription>
-            You haven&apos;t created any projects yet. Get started by creating
-            your first project.
+            You haven&apos;t created any QR codes yet
           </EmptyDescription>
         </EmptyHeader>
         <EmptyContent className="flex-row justify-center gap-2">
-          <Button>Create Project</Button>
-          <Button variant="outline">Import Project</Button>
+          <Button type="button" onClick={onClickQR}>
+            Create QR Code
+          </Button>
+          <Button type="button" onClick={onClickImport} variant="outline">Import QR Code</Button>
         </EmptyContent>
       </Empty>
     </>
