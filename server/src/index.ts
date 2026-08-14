@@ -19,6 +19,10 @@ app.get("/", (_req, res) => {
   res.render("index");
 });
 
+app.get("/api/test", (_req, res) => {
+  res.status(200).send("API is running");
+});
+
 app.get("/not-found", (_req, res) => {
   res.status(404).send("Not found");
 });

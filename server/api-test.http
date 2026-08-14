@@ -1,6 +1,9 @@
 ### List users
 GET http://localhost:3000/users HTTP/1.1
 
+### test route
+GET http://localhost:3000/api/test HTTP/1.1
+
 ### Register users
 POST http://localhost:3000/register HTTP/1.1
 
@@ -10,3 +13,9 @@ GET http://localhost:3000/responses?take=15&skip=0 HTTP/1.1
 
 ### Google sheet response - all
 GET http://localhost:3000/responses/all HTTP/1.1
+
+### Public - Google sheet response - all
+GET https://syu-youth-service-app-production.up.railway.app/responses/all HTTP/1.1
+
+### Public - test route
+GET https://syu-youth-service-app-production.up.railway.app/api/test HTTP/1.1
