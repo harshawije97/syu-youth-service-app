@@ -1,5 +1,3 @@
-import { API_URL } from "@/lib/resolve-api";
-
 // Get all data from API
 export const getAllData = async () => {
   const res = await fetch(
@@ -26,6 +24,30 @@ export const saveAttendance = async (data: any) => {
     );
     if (!res.ok) throw new Error(res.statusText);
 
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Get all users
+export const getAllUsers = async () => {
+  try {
+    const res = await fetch(
+      `https://syu-youth-service-app-production.up.railway.app/users`,
+    );
+    return res.json();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+// Get user by id
+export const getUserById = async (id: string) => {
+  try {
+    const res = await fetch(
+      `https://syu-youth-service-app-production.up.railway.app/users/${id}`,
+    );
     return res.json();
   } catch (error) {
     console.error(error);
