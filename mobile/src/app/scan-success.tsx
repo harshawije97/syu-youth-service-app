@@ -6,12 +6,19 @@ import { globalStyles } from "@/styles/global";
 import { ScanData } from "@/lib/types";
 import { IconCircleCheck } from "@tabler/icons-react-native";
 import DetailedRow from "@/components/detailed-row";
+import { saveAttendance } from "@/lib/api";
+
+type DataProps = {
+  id: string;
+  fullName: string;
+  contactNo: string;
+};
 
 export default function ScanSuccessScreen() {
   const scannedData = useScanStore((state) => state.scannedData);
   const resetScanned = useScanStore((state) => state.resetScanned);
 
-  const [data, setData] = React.useState<ScanData | null>(null);
+  const [data, setData] = React.useState<any | string>("Loading...");
   const [error, setError] = React.useState<string | null>(null);
 
   const handleGoBack = () => {
@@ -22,7 +29,12 @@ export default function ScanSuccessScreen() {
 
   React.useEffect(() => {
     const parseData = JSON.parse(scannedData!);
-    console.log("Scanned data:", parseData);
+
+    saveAttendance(parseData)
+      .then((res) => {
+        if (res.success) setData(parseData);
+      })
+      .catch((err) => err);
   }, []);
 
   return (
@@ -33,14 +45,18 @@ export default function ScanSuccessScreen() {
         </View>
 
         <Text style={globalStyles.title}>Scan Successful!</Text>
-        <Text style={globalStyles.name}>Full Name</Text>
+        <Text style={globalStyles.name}>{data.name === "" ? "Loading..." : data.name}</Text>
 
         <View style={globalStyles.divider} />
 
         <View style={globalStyles.detailsBlock}>
-          <DetailedRow label="Full Name" value={"John Doe"} />
-          <DetailedRow label="Mobile Number" value={"+1234567890"} />
-          <DetailedRow label="Date of Birth" value={"01/01/2000"} />
+          {data !== "Loading..." && (
+            <>
+              <DetailedRow label="ID" value={data.id || ""} />
+              <DetailedRow label="Full Name" value={data.name || ""} />
+              <DetailedRow label="Mobile Number" value={data.contact || ""} />
+            </>
+          )}
         </View>
 
         <View style={globalStyles.badge}>
