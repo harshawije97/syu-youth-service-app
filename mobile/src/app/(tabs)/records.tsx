@@ -6,31 +6,23 @@ import {
   ScrollView,
 } from "react-native";
 import React from "react";
-import { Client, getClients } from "@/storage/async-storage";
+import { Client, getClients, RegisteredClients } from "@/storage/async-storage";
 import { globalStyles } from "@/styles/global";
 import { clientSyncService } from "@/services/client";
-import Card from "@/components/client-card";
+import Card, { ClientCardRegistered } from "@/components/client-card";
+import { getAllUsers } from "@/lib/api";
 
 export default function RecordsScreen() {
-  const [clients, setClients] = React.useState<Client[]>([]);
+  const [clients, setClients] = React.useState<RegisteredClients[]>([]);
   const [loading, setLoading] = React.useState(false);
-
-  const loadClients = React.useCallback(async () => {
-    const data = await getClients();
-    setClients(data);
-  }, []);
-
-  // React.useEffect(() => {
-  //   loadClients();
-  // }, [loadClients]);
 
   const setHandleAsync = async () => {
     // loading = true;
     setLoading(true);
     // load clients into the state
     try {
-      await clientSyncService().then(() => loadClients());
-      // setClients(synced);
+      const {data: synced} = await getAllUsers();
+      setClients(synced);
     } catch (err) {
       console.error("Sync failed:", err);
     } finally {
@@ -49,7 +41,7 @@ export default function RecordsScreen() {
           {loading ? (
             <ActivityIndicator color="#fff" />
           ) : (
-            <Text style={globalStyles.buttonText}>Sync pre-registrations</Text>
+            <Text style={globalStyles.buttonText}>Sync Scanned Records</Text>
           )}
         </Pressable>
       </View>
@@ -59,15 +51,7 @@ export default function RecordsScreen() {
           <Text>No records found.</Text>
         ) : (
           clients.map((client) => (
-            <Card
-              key={client.id}
-              id={client.id}
-              fullName={client.fullName}
-              contactNo={client.contactNo}
-              division={client.division}
-              isAttended={client.isAttended!}
-              timestamp={client.timestamp}
-            />
+            <ClientCardRegistered key={client.id} {...client} />
           ))
         )}
       </ScrollView>

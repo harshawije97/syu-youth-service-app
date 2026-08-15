@@ -37,11 +37,19 @@ export const clientSyncService = async (): Promise<void> => {
     await clearStorage();
   }
 
-  // TODO:: these functions have to be changed. 
+  // TODO:: these functions have to be changed.
   //  Fetch all clients -> fetch from the mongodb
   //  Seed clients into storage -> as usual
 
   const clients = await fetchAllClients();
   const response = await seedClientsToStorage(clients);
   await AsyncStorage.setItem(CLIENT_KEY, JSON.stringify(response));
+};
+
+export const getLocalClients = async (): Promise<number> => {
+  const raw = await AsyncStorage.getItem(CLIENT_KEY);
+  if (!raw) return 0;
+
+  const parsed = JSON.parse(raw);
+  return Array.isArray(parsed) ? parsed.length : 0;
 };

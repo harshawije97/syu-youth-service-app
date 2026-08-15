@@ -18,6 +18,12 @@ export type Client = {
   isAttended?: false,
 };
 
+export type RegisteredClients = {
+  id: string;
+  fullName: string;
+  contactNo: string;
+}
+
 type ApiClientRecord = {
   "Are you coming to Youth Summit?": string;
   Birthdate: string;

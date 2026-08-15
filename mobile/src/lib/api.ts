@@ -34,7 +34,7 @@ export const saveAttendance = async (data: any) => {
 export const getAllUsers = async () => {
   try {
     const res = await fetch(
-      `https://syu-youth-service-app-production.up.railway.app/users`,
+      `https://syu-youth-service-app-production.up.railway.app/attendance/all`,
     );
     return res.json();
   } catch (error) {
@@ -46,7 +46,7 @@ export const getAllUsers = async () => {
 export const getUserById = async (id: string) => {
   try {
     const res = await fetch(
-      `https://syu-youth-service-app-production.up.railway.app/users/${id}`,
+      `https://syu-youth-service-app-production.up.railway.app/attendance?id=${id}`,
     );
     return res.json();
   } catch (error) {
