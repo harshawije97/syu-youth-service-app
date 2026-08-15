@@ -6,12 +6,15 @@ import {
   getFormResponses,
 } from "./services/form-response-service.js";
 import cors from "cors";
+import { dbClient } from "./database/client.js";
+import { saveAttendance } from "./queries/mongodb-query.js";
 
 dotenv.config();
 const sheetId = process.env.GOOGLE_SHEET_ID;
 
 const app = express();
 app.use(cors());
+app.use(express.json());
 app.set("view engine", "ejs");
 
 // Public routes
@@ -27,8 +30,21 @@ app.get("/not-found", (_req, res) => {
   res.status(404).send("Not found");
 });
 
-app.post("/register", async (_req, res) => {
-  res.send("Register");
+app.post("/register", async (req, res) => {
+  try {
+    const body = req.body;
+    const response = await saveAttendance(body);
+
+    res.status(200).json({
+      success: true,
+      data: response.id,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
 });
 
 // Google sheet responses - limit
@@ -81,8 +97,12 @@ app.get("/responses/all", async (req: Request, res: Response) => {
   }
 });
 
-// Auth routes - Protected routes
-
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+async function bootstrap() {
+  await dbClient();
+  console.log("MongoDB connected");
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}
+
+bootstrap();

@@ -6,10 +6,26 @@ GET http://localhost:3000/api/test HTTP/1.1
 
 ### Register users
 POST http://localhost:3000/register HTTP/1.1
+Content-Type: application/json
+
+{
+    "fullName": "Harshana Wijeisnghe",
+    "birthDate": "1997/04/12",
+    "NIC": "199710301450",
+    "contactNo": "768945884",
+    "division": "Division 1",
+    "gnDivision": "Gn Division 1",
+    "employment": "Yes",
+    "willingToContribute": "Yes",
+    "specialAbilities": "No",
+    "comingToYouthSummit": "No",
+    "gnDivisionCount": "0",
+    "timestamp": "2026-08-15",
+    "isRegistered": false
+}
 
 ### Google sheet response - query
 GET http://localhost:3000/responses?take=15&skip=0 HTTP/1.1
-
 
 ### Google sheet response - all
 GET http://localhost:3000/responses/all HTTP/1.1
