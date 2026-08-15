@@ -7,7 +7,12 @@ import {
 } from "./services/form-response-service.js";
 import cors from "cors";
 import { dbClient } from "./database/client.js";
-import { registrationsByQR, saveAttendance } from "./queries/mongodb-query.js";
+import {
+  getAllRegistrations,
+  getRegistrationById,
+  registrationsByQR,
+  saveAttendance,
+} from "./queries/mongodb-query.js";
 
 dotenv.config();
 const sheetId = process.env.GOOGLE_SHEET_ID;
@@ -55,6 +60,41 @@ app.post("/attendance", async (req, res) => {
     res.status(200).json({
       success: true,
       data: response.id,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+app.get("/attendance/all", async (req: Request, res: Response) => {
+  try {
+    const response = await getAllRegistrations();
+
+    res.status(200).json({
+      success: true,
+      data: response,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+// Get attendance by id
+app.get("/attendance", async (req: Request, res: Response) => {
+  try {
+    // Get id by query param
+    const id = req.query.id as string;
+    const response = await getRegistrationById(id);
+
+    res.status(200).json({
+      success: true,
+      data: response,
     });
   } catch (error) {
     res.status(500).json({
