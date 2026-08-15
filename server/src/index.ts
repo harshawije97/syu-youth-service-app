@@ -7,7 +7,7 @@ import {
 } from "./services/form-response-service.js";
 import cors from "cors";
 import { dbClient } from "./database/client.js";
-import { saveAttendance } from "./queries/mongodb-query.js";
+import { registrationsByQR, saveAttendance } from "./queries/mongodb-query.js";
 
 dotenv.config();
 const sheetId = process.env.GOOGLE_SHEET_ID;
@@ -34,6 +34,23 @@ app.post("/register", async (req, res) => {
   try {
     const body = req.body;
     const response = await saveAttendance(body);
+
+    res.status(200).json({
+      success: true,
+      data: response.id,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: error instanceof Error ? error.message : "Unknown error",
+    });
+  }
+});
+
+app.post("/attendance", async (req, res) => {
+  try {
+    const body = req.body;
+    const response = await registrationsByQR(body);
 
     res.status(200).json({
       success: true,

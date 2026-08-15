@@ -54,3 +54,18 @@ export const AttendanceSchema = new mongoose.Schema({
     required: true,
   },
 });
+
+export const RegistrationSchema = new mongoose.Schema({
+  id: {
+    type: String,
+    required: true,
+  },
+  fullName: {
+    type: String,
+    required: true,
+  },
+  contactNo: {
+    type: String,
+    required: true,
+  },
+});

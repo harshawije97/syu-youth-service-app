@@ -24,6 +24,16 @@ Content-Type: application/json
     "isRegistered": false
 }
 
+### Attend users
+POST http://localhost:3000/attendance HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": "1",
+    "fullName": "Harshana Wijesinghe",
+    "contactNo": "768945884"
+}
+
 ### Google sheet response - query
 GET http://localhost:3000/responses?take=15&skip=0 HTTP/1.1
 

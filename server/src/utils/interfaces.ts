@@ -41,3 +41,9 @@ export interface MappedRecord {
   gnDivisionCount: string;
   timestamp: string;
 }
+
+export interface QrRecord {
+  id: string;
+  fullName: string;
+  mobileNumber: string;
+};
