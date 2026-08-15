@@ -36,6 +36,19 @@ export interface MappedRecord {
   timestamp: string;
 }
 
+// export type RegisteredRecord = {
+//   fullName: string;
+//   birthDate: string;
+//   NIC: string;
+//   contactNo: string;
+//   division: string;
+//   gnDivision: string;
+//   employment: string;
+//   willingToContribute: string;
+//   specialAbilities: string;
+//   timestamp: string;
+// };
+
 export interface MessageCardProps {
   id: string;
   fullName: string;
