@@ -58,12 +58,6 @@ function PanelRight({ selected }: PanelRightProps) {
               <div className="w-full flex gap-x-4 pt-8">
                 <Button className="w-max">Send by WhatsApp</Button>
                 <Button variant="destructive">Reject Record</Button>
-                <Button
-                  variant="outline"
-                  className="w-max text-blue-600 bg-blue-100"
-                >
-                  <Download className="mr-2 h-4 w-4" /> Download QR Code
-                </Button>
               </div>
             </TabsContent>
           </Tabs>
