@@ -57,18 +57,17 @@ function QRGenerator({ data, size }: QRGeneratorProps) {
     img.src = url;
   };
 
-  const downloadAsSVG = () => {
-    const svg = containerRef.current?.querySelector("svg");
-    if (!svg) return;
-  };
-
   return (
     <div className="w-full flex flex-row gap-4">
       <div ref={containerRef} className="w-max">
         <QRCodeSVG value={JSON.stringify(data)} size={qrSize} />
       </div>
       <div className="flex flex-col h-full items-center justify-center gap-2 mt-2">
-        <Button onClick={downloadAsPNG} className="px-3 py-1 border rounded text-blue-600 bg-blue-100" variant="outline">
+        <Button
+          onClick={downloadAsPNG}
+          className="px-3 py-1 border rounded text-blue-600 bg-blue-100"
+          variant="outline"
+        >
           <Download className="mr-2 h-4 w-4" />
           Download QR Code
         </Button>

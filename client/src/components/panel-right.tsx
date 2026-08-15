@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Card, CardContent, CardHeader } from "./ui/card";
-import { Download } from "lucide-react";
 import { Button } from "./ui/button";
 import { Tabs } from "radix-ui/tabs";
 import { TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
