@@ -37,6 +37,10 @@ export const clientSyncService = async (): Promise<void> => {
     await clearStorage();
   }
 
+  // TODO:: these functions have to be changed. 
+  //  Fetch all clients -> fetch from the mongodb
+  //  Seed clients into storage -> as usual
+
   const clients = await fetchAllClients();
   const response = await seedClientsToStorage(clients);
   await AsyncStorage.setItem(CLIENT_KEY, JSON.stringify(response));

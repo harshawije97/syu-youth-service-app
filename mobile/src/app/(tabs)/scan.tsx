@@ -1,7 +1,8 @@
+import * as Haptics from "expo-haptics";
 import { View, Text, Pressable } from "react-native";
 import React, { useEffect } from "react";
 import { CameraView, useCameraPermissions } from "expo-camera";
-import { useState, useRef, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import { colors, globalStyles } from "@/styles/global";
 import { useScanStore } from "@/zustand/scan-store";
 import { router } from "expo-router";
@@ -26,6 +27,9 @@ export default function ScanScreen() {
       lockRef.current = true;
 
       setScanned(data);
+
+      // Vibrate the device when a QR code is scanned
+      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
       router.push("/scan-success");
     },
     [setScanned],

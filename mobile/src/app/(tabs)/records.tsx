@@ -20,9 +20,9 @@ export default function RecordsScreen() {
     setClients(data);
   }, []);
 
-  React.useEffect(() => {
-    loadClients();
-  }, [loadClients]);
+  // React.useEffect(() => {
+  //   loadClients();
+  // }, [loadClients]);
 
   const setHandleAsync = async () => {
     // loading = true;

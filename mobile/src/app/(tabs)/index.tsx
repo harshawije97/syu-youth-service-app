@@ -41,7 +41,7 @@ export default function HomeScreen() {
         }}
       >
         <MacroGrid />
-        <ResentRecords />
+        {/* <ResentRecords />  */}
       </View>
     </ScrollView>
   );
