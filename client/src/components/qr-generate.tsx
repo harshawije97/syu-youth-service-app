@@ -31,9 +31,18 @@ function QRGenerator({ data, size }: QRGeneratorProps) {
     img.onload = () => {
       // Use a scale factor for higher resolution output
       const scale = 4;
+      const pixels = qrSize * scale;
+      const line1 = "Greetings from SYU Youth Team";
+      const line2 = "Use this QR at the entrance";
+
+      const padding = 20 * scale;
+      const textAreaHeight = 60 * scale;
+      const canvasWidth = pixels + padding * 2;
+      const canvasHeight = pixels + padding * 2 + textAreaHeight;
+
       const canvas = document.createElement("canvas");
-      canvas.width = qrSize * scale;
-      canvas.height = qrSize * scale;
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
 
       const ctx = canvas.getContext("2d");
       if (!ctx) return;
@@ -41,9 +50,31 @@ function QRGenerator({ data, size }: QRGeneratorProps) {
       // white background (SVG has transparent bg by default)
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // draw QR code, centered horizontally
+      ctx.drawImage(img, padding, padding, pixels, pixels);
 
       URL.revokeObjectURL(url);
+
+      // draw the caption text
+      ctx.fillStyle = "#000000";
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+
+      const fontSize = 14 * scale;
+      ctx.font = `bold ${fontSize}px sans-serif`;
+      ctx.fillText(
+        line1,
+        canvasWidth / 2,
+        pixels + padding + textAreaHeight * 0.35,
+      );
+
+      ctx.font = `${fontSize * 0.85}px sans-serif`;
+      ctx.fillText(
+        line2,
+        canvasWidth / 2,
+        pixels + padding + textAreaHeight * 0.65,
+      );
 
       canvas.toBlob((blob) => {
         if (!blob) return;
