@@ -53,3 +53,18 @@ export const getLocalClients = async (): Promise<number> => {
   const parsed = JSON.parse(raw);
   return Array.isArray(parsed) ? parsed.length : 0;
 };
+
+export const checkDataType = (data: string) => {
+  // Check if this is a JSON string
+  const expectedKeys = ["contact", "id", "name"];
+
+  try {
+    const parsed = JSON.parse(data);
+
+    if (!expectedKeys.every((key) => key in parsed)) return "Invalid QR Code.";
+    // Check if this is a valid QR code
+    return true;
+  } catch (e) {
+    return "Invalid QR Code. Please try again.";
+  }
+};

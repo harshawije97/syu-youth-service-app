@@ -4,9 +4,10 @@ import { useScanStore } from "@/zustand/scan-store";
 import { router } from "expo-router";
 import { globalStyles } from "@/styles/global";
 import { ScanData } from "@/lib/types";
-import { IconCircleCheck } from "@tabler/icons-react-native";
+import { IconCircleCheck, IconCircleX } from "@tabler/icons-react-native";
 import DetailedRow from "@/components/detailed-row";
 import { saveAttendance } from "@/lib/api";
+import { checkDataType } from "@/services/client";
 
 type DataProps = {
   id: string;
@@ -28,7 +29,14 @@ export default function ScanSuccessScreen() {
   };
 
   React.useEffect(() => {
-    console.log(scannedData);
+    const validateQR = checkDataType(scannedData!);
+
+    if (typeof validateQR === "string") {
+      setError(validateQR);
+      console.error(validateQR);
+      return;
+    }
+
     const parseData = JSON.parse(scannedData!);
 
     saveAttendance(parseData)
@@ -38,6 +46,27 @@ export default function ScanSuccessScreen() {
       .catch((err) => err);
   }, []);
 
+  if (error) {
+    return (
+      <View style={globalStyles.container}>
+        <View style={globalStyles.content}>
+          <View style={globalStyles.iconCircle}>
+            <IconCircleX size={64} color="#fff" strokeWidth={2.2} />
+          </View>
+
+          <Text style={globalStyles.title}>Scan Failed</Text>
+          <Text style={globalStyles.name}>{error}</Text>
+
+          <View style={{ width: "100%", alignItems: "center", marginTop: 24 }}>
+            <Pressable onPress={handleGoBack} style={globalStyles.button}>
+              <Text style={globalStyles.buttonText}>Go Back</Text>
+            </Pressable>
+          </View>
+        </View>
+      </View>
+    );
+  }
+
   return (
     <View style={globalStyles.container}>
       <View style={globalStyles.content}>
@@ -46,7 +75,9 @@ export default function ScanSuccessScreen() {
         </View>
 
         <Text style={globalStyles.title}>Scan Successful!</Text>
-        <Text style={globalStyles.name}>{data.name === "" ? "Loading..." : data.name}</Text>
+        <Text style={globalStyles.name}>
+          {data.name === "" ? "Loading..." : data.name}
+        </Text>
 
         <View style={globalStyles.divider} />
 
