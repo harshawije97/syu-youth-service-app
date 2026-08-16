@@ -8,7 +8,7 @@ import { Button } from "./ui/button";
 export const navLinks = [
   { label: "Pre-registrations", href: "/pre-registration" },
   { label: "Registration", href: "/registration", isBlank: true },
-  { label: "Reports", href: "/reports" },
+  { label: "All Records", href: "/all-records" },
 ];
 
 function Navbar() {
