@@ -28,6 +28,7 @@ export default function ScanSuccessScreen() {
   };
 
   React.useEffect(() => {
+    console.log(scannedData);
     const parseData = JSON.parse(scannedData!);
 
     saveAttendance(parseData)
