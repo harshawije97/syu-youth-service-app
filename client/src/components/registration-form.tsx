@@ -77,13 +77,19 @@ export function BugReportForm() {
   function onSubmit(data: z.infer<typeof formSchema>) {
     // Console log the form data
     const formData = JSON.stringify(
-      { ...data, timeStamp: new Date().toISOString() },
+      {
+        ...data,
+        comingToYouthSummit: "yes",
+        gnDivisionCount: "0",
+        timestamp: new Date().toISOString(),
+        isRegistered: true,
+      },
       null,
       2,
     );
-    saveRegistration(formData).then(() =>
-      toast.success("You are registered!"),
-    );
+    saveRegistration(formData)
+      .then(() => toast.success("You are registered!"))
+      .catch(() => toast.error("Something went wrong!"));
   }
 
   return (
