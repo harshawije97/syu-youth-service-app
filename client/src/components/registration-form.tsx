@@ -253,7 +253,7 @@ export function BugReportForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    Willing to Contribute
+                    Willing to contribute/ work with SYU in further?
                   </FieldLabel>
                   <Select value={field.value} onValueChange={field.onChange}>
                     <SelectTrigger className="w-45">
@@ -281,7 +281,7 @@ export function BugReportForm() {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel htmlFor="form-rhf-demo-title">
-                    Special Abilities
+                    For that, any special abilities, Dancing, singing, etc.
                   </FieldLabel>
                   <InputGroup>
                     <Input
