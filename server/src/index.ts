@@ -72,7 +72,7 @@ app.post("/attendance", async (req, res) => {
 
 app.get("/attendance/all", async (req: Request, res: Response) => {
   try {
-    const response = await getAllAttendances();
+    const response = await getAllRegistrations();
 
     res.status(200).json({
       success: true,
