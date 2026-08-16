@@ -49,6 +49,12 @@ export interface MappedRecord {
 //   timestamp: string;
 // };
 
+export type TableDataColumn = {
+  id: string;
+  fullName: string;
+  contactNo: string;
+};
+
 export interface MessageCardProps {
   id: string;
   fullName: string;

@@ -10,6 +10,10 @@ export const checkDataType = (data: string) => {
 
     // Check if this is a valid QR code
     if (!expectedKeys.every((key) => key in parsed)) return "Invalid QR Code.";
+
+    // Check the values
+    
+
     return true;
   } catch (e) {
     return "Invalid QR Code. Please try again.";

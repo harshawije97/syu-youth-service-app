@@ -1,15 +1,9 @@
-import React from 'react'
+import { getAllAttendanceRecords } from "@/services/get-pre-records";
+import React from "react";
 
-type TableDataColumn = {
-    id: string;
-    fullName: string;
-    contactNo: string;
+async function AllRecordsPage() {
+  await getAllAttendanceRecords();
+  return <div>AllRecordsPage</div>;
 }
 
-function AllRecordsPage() {
-  return (
-    <div>AllRecordsPage</div>
-  )
-}
-
-export default AllRecordsPage
+export default AllRecordsPage;
