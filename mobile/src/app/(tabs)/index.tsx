@@ -1,7 +1,4 @@
 import HomeHeader from "@/components/home-header";
-import MacroGrid from "@/components/macro-grid";
-import ResentRecords from "@/components/resent-records";
-import { clientSyncService } from "@/services/client";
 import { colors, globalStyles } from "@/styles/global";
 import { IconCamera, IconFileSpreadsheet } from "@tabler/icons-react-native";
 import { Link } from "expo-router";
@@ -15,41 +12,6 @@ import {
 } from "react-native";
 
 export default function HomeScreen() {
-  const [isLoading, setIsLoading] = React.useState(true);
-  const [error, setError] = React.useState<Error | null>(null);
-
-  React.useEffect(() => {
-    const init = async () => {
-      try {
-        await clientSyncService();
-      } catch (err) {
-        setError(err as Error);
-        console.error('Client sync failed:', err);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    init();
-  }, []);
-
-  if (isLoading) {
-    return (
-      <View style={globalStyles.center}>
-        <ActivityIndicator size="large" />
-      </View>
-    );
-  }
-
-  if (error) {
-    // Optionally show an error screen with a retry button
-    return (
-      <View style={globalStyles.center}>
-        <Text>Something went wrong {error.message}</Text>
-      </View>
-    );
-  }
-
   return (
     <ScrollView style={globalStyles.container}>
       <Text style={globalStyles.title}>Welcome to QR Attend</Text>
@@ -83,7 +45,6 @@ export default function HomeScreen() {
           marginTop: 20,
         }}
       >
-        <MacroGrid />
         {/* <ResentRecords />  */}
       </View>
     </ScrollView>
