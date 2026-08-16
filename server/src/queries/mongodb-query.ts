@@ -15,14 +15,14 @@ export const registrationsByQR = async (data: QrRecord) => {
 
 // Get all registrations
 export const getAllRegistrations = async () => {
-  const registrations = await Registration.find({});
+  const registrations = await Attendance.find({});
 
   return registrations;
 };
 
 // Get registrations by Id
 export const getRegistrationById = async (id: string) => {
-  const registration = await Registration.find({
+  const registration = await Attendance.find({
     id: id,
   });
 
