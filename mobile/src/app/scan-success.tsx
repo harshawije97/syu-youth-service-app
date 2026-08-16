@@ -30,15 +30,16 @@ export default function ScanSuccessScreen() {
 
   React.useEffect(() => {
     const validateQR = checkDataType(scannedData!);
+    console.log(validateQR);
 
     if (typeof validateQR === "string") {
       setError(validateQR);
+
       console.error(validateQR);
       return;
     }
 
     const parseData = JSON.parse(scannedData!);
-
 
     saveAttendance(parseData)
       .then((res) => {
