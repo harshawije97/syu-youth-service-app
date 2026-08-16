@@ -7,7 +7,7 @@ import { ScanData } from "@/lib/types";
 import { IconCircleCheck, IconCircleX } from "@tabler/icons-react-native";
 import DetailedRow from "@/components/detailed-row";
 import { saveAttendance } from "@/lib/api";
-import { checkDataType } from "@/services/client";
+import { checkDataGuard, checkDataType } from "@/services/client";
 
 type DataProps = {
   id: string;
@@ -38,6 +38,13 @@ export default function ScanSuccessScreen() {
     }
 
     const parseData = JSON.parse(scannedData!);
+
+    const dataGuard = checkDataGuard(parseData.id)
+      .then((res) => {
+        if (typeof res === "string") setError(res);
+        return;
+      })
+      .catch((err) => console.error(err));
 
     saveAttendance(parseData)
       .then((res) => {
